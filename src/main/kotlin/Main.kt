@@ -66,16 +66,6 @@ fun interpret(args: Array<String>) {
     }
 }
 
-fun sentSplitter(sentence: String): Array<String> {
-    // Vérifier si la phrase n'est pas vide ou nulle
-    if (sentence.isBlank()) {
-        return arrayOf() // Retourne un tableau vide si la chaîne est vide ou composée d'espaces
-    }
-
-    // Diviser la phrase en utilisant un ou plusieurs espaces comme séparateurs
-    return sentence.split("\\s+".toRegex()).toTypedArray()
-}
-
 fun String.isNumeric(): Boolean {
     return this.toDoubleOrNull() != null
 }
@@ -134,8 +124,6 @@ fun tokenize(source: String): List<Token> {
 fun main(args:Array<String>) {
     interpret(args)
     println("success")
-    val words = sentSplitter("pas de caviard  pour toi")
-    println(words.joinToString(", "))
     val source = "( a + b ) - 123"
     val tokens = tokenize(source)
     tokens.forEach { println(it) }
