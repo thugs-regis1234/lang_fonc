@@ -66,6 +66,7 @@ fun interpret(args: Array<String>) {
     }
 }
 
+
 fun String.isNumeric(): Boolean {
     return this.toDoubleOrNull() != null
 }
@@ -94,6 +95,10 @@ fun tokenize(source: String): List<Token> {
 
                 val start = index
                 while (index < chars.size && !chars[index].isWhitespace() && chars[index] !in "(){}") {
+                    if(chars[index]=='='&& chars[index]!='=')
+                        tokens.add(Token(TokenType.EQUAL, "=", line = line))
+                    else
+                        tokens.add(Token(TokenType.BANG_EQUAL, "==", line = line))
                     index++
                 }
                 val text = source.substring(start, index)
@@ -122,10 +127,11 @@ fun tokenize(source: String): List<Token> {
 
 
 fun main(args:Array<String>) {
-    interpret(args)
+    interpret1(args)
     println("success")
-    val source = "( a + b ) - 123"
+    val source = "( a + b ) - 123=2"
     val tokens = tokenize(source)
     tokens.forEach { println(it) }
+
 }
 
